@@ -1,0 +1,24 @@
+<h2>In list:</h2>
+
+<div class="row">
+  <div class="col-12">
+    <button class="btn" (click)="changePage(pagination.currentPage - 1)">Prev</button>
+    <button class="btn" disabled>{{pagination.currentPage}}</button>
+    <button class="btn" (click)="changePage(pagination.currentPage + 1)">Next</button>
+  </div>
+  <div class="col-8">
+    <div *ngFor="let fish of fishList">
+      <p [class.selected]="selectedFish === fish">{{fish.Genus}} {{fish.Species}}
+        <button class="btn btn-primary" *ngIf="selectedFish !== fish" (click)="selectedFish = fish"> Select </button>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <fish-info [fish]="selectedFish"></fish-info>
+  </div>
+</div>
+
+
+
+<br/>

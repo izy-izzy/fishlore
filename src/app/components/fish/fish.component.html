@@ -1,0 +1,35 @@
+
+<div *ngIf="fish">
+  <h2>{{fish.Genus}} {{fish.Species}}</h2>
+  <div><b>Author:</b> {{fish.Author}}</div>
+  <div><b>Class:</b> {{fish.Class}}</div>
+  <div><b>FBname:</b> {{fish.FBname}}</div>
+  <div><b>FamCode:</b> {{fish.FamCode}}</div>
+  <div><b>Family:</b> {{fish.Family}}</div>
+  <div><b>GenCode:</b> {{fish.GenCode}}</div>
+  <div><b>Genus:</b> {{fish.Genus}}</div>
+  <div><b>Order:</b> {{fish.Order}}</div>
+  <div><b>Remark:</b> {{fish.Remark}}</div>
+  <div><b>SpecCode:</b> {{fish.SpecCode}}</div>
+  <div><b>Species:</b> {{fish.Species}}</div>
+  <div><b>SpeciesRefNo:</b> {{fish.SpeciesRefNo}}</div>
+  <div><b>SubFamily:</b> {{fish.SubFamily}}</div>
+  <div><b>SubGenCode:</b> {{fish.SubGenCode}}</div>
+
+  <img src="{{getPrefferedImage()}}"/>
+
+  <a target="_blank" href="{{getGoogleImagesLink()}}">Google Images</a>
+  <!--<form>-->
+    <!--<div class="form-group">-->
+      <!--<button class="btn btn-primary"-->
+              <!--(click)="toggleNameChange()">-->
+        <!--<span *ngIf="nameChangeEnabled">Save</span>-->
+        <!--<span *ngIf="!nameChangeEnabled">Change</span>-->
+        <!--Fish name-->
+      <!--</button>-->
+    <!--</div>-->
+    <!--<input type="text" *ngIf="nameChangeEnabled" [(ngModel)]="temporalFishName" placeholder="James Brown"/>-->
+  <!--</form>-->
+</div>
+
+
