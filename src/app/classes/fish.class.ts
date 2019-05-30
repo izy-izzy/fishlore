@@ -14,5 +14,6 @@ export class Fish {
   SubFamily: string;
   SubGenCode: null;
   PicPreferredName: string;
+  PicLink: string;
 }
 

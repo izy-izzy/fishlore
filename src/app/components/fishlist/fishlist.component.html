@@ -1,24 +1,25 @@
-<h2>In list:</h2>
 
-<div class="row">
-  <div class="col-12">
-    <button class="btn" (click)="changePage(pagination.currentPage - 1)">Prev</button>
-    <button class="btn" disabled>{{pagination.currentPage}}</button>
-    <button class="btn" (click)="changePage(pagination.currentPage + 1)">Next</button>
-  </div>
-  <div class="col-8">
-    <div *ngFor="let fish of fishList">
-      <p [class.selected]="selectedFish === fish">{{fish.Genus}} {{fish.Species}}
-        <button class="btn btn-primary" *ngIf="selectedFish !== fish" (click)="selectedFish = fish"> Select </button>
-      </p>
+<div fxLayout="row" 
+  fxLayout.xs="column" 
+  fxFlexFill>
+  <div fxFlex="70" class="sec1" fxFlex.md="60" fxFlex.xs="40">
+    <div *ngIf="pagination">
+      <pagination [pagination]="pagination" (pageChange)="changePage($event)"></pagination>
     </div>
+    
+    <mat-list>
+      <mat-list-item *ngFor="let fish of fishList; let last = last" 
+                      [class.selected]="selectedFish === fish">
+        <span class="name">{{fish.Genus}} {{fish.Species}}</span>
+        <button mat-button color="primary" *ngIf="selectedFish !== fish" (click)="selectedFish = fish"> Select </button>
+      
+        <mat-divider *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
   </div>
-
-  <div class="col-4">
+  <div fxFlex="30" class="sec3" fxFlex.md="40" fxFlex.xs="70">
     <fish-info [fish]="selectedFish"></fish-info>
   </div>
 </div>
 
 
-
-<br/>

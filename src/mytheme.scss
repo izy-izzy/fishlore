@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+@import './app/components/fishlist/fishlist.component.scss';
+
+
+$my-theme-primary: mat-palette($mat-lime);
+$my-theme-accent : mat-palette($mat-pink);
+$my-theme-warn   : mat-palette($mat-red);
+$my-theme: mat-dark-theme(    $my-theme-primary,    $my-theme-accent,    $my-theme-warn);
+@include mat-core();
+@include angular-material-theme($my-theme);
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+@include angular-material-typography($custom-typography);
+@include fish-list-theme($my-theme);
+
+a:hover{
+  // color : linear-gradient(to right, mat-color($primary, 400), mat-color($primary, 100));
+  background: -webkit-gradient(linear,left top,right top,from(mat-color($my-theme-accent, 400)),to(mat-color($my-theme-accent, 100)));
+  background: linear-gradient(to right, mat-color($my-theme-accent, 500), mat-color($my-theme-accent, 300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: none;
+}

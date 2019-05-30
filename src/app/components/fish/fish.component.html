@@ -16,20 +16,10 @@
   <div><b>SubFamily:</b> {{fish.SubFamily}}</div>
   <div><b>SubGenCode:</b> {{fish.SubGenCode}}</div>
 
-  <img src="{{getPrefferedImage()}}"/>
+  <img *ngIf="fish.PicLink" src="{{fish.PicLink}}"/>
 
   <a target="_blank" href="{{getGoogleImagesLink()}}">Google Images</a>
-  <!--<form>-->
-    <!--<div class="form-group">-->
-      <!--<button class="btn btn-primary"-->
-              <!--(click)="toggleNameChange()">-->
-        <!--<span *ngIf="nameChangeEnabled">Save</span>-->
-        <!--<span *ngIf="!nameChangeEnabled">Change</span>-->
-        <!--Fish name-->
-      <!--</button>-->
-    <!--</div>-->
-    <!--<input type="text" *ngIf="nameChangeEnabled" [(ngModel)]="temporalFishName" placeholder="James Brown"/>-->
-  <!--</form>-->
+
 </div>
 
 

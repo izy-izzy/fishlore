@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Fish} from '../../classes/fish.class';
-import {FishstoreService} from '../../services/fishstore.service';
-import {Observable, Subscription} from 'rxjs';
-import {IFishDataResponse} from '../../services/api/fishbase.service';
-
-export interface IPagination {
-  currentPage: number;
-  totalItems: number;
-  itemsPerPage: number;
-}
+import { Fish } from '../../classes/fish.class';
+import { FishstoreService } from '../../services/fishstore.service';
+import { Subscription } from 'rxjs';
+import { IPagination } from '../pagination/pagination.component';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'fish-list',
@@ -17,12 +12,12 @@ export interface IPagination {
 })
 export class FishlistComponent implements OnInit {
 
-  private fishList: Fish[];
+  public fishList: Fish[];
   private listSubscription: Subscription;
   public pagination: IPagination = {
     currentPage: 0,
     totalItems: undefined,
-    itemsPerPage: 15
+    itemsPerPage: 10
   }
 
   constructor(private fishstore: FishstoreService) { }
@@ -31,8 +26,9 @@ export class FishlistComponent implements OnInit {
     this.updateFishList();
   }
 
-  public changePage(page: number): void {
-    this.pagination.currentPage = page;
+  public changePage(page: PageEvent): void {
+    this.pagination.currentPage = page.pageIndex;
+    this.pagination.itemsPerPage = page.pageSize;
     this.updateFishList();
   }
 
