@@ -4,7 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatMenuModule, MatDividerModule, MatListModule, MatPaginatorModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatMenuModule,
+  MatDividerModule,
+  MatListModule,
+  MatPaginatorModule,
+  MatCardModule,
+  MatExpansionModule, MatTooltipModule
+} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +43,10 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     MatDividerModule,
     MatListModule,
     MatPaginatorModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

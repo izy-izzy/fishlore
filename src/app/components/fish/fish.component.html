@@ -1,24 +1,34 @@
 
-<div *ngIf="fish">
-  <h2>{{fish.Genus}} {{fish.Species}}</h2>
-  <div><b>Author:</b> {{fish.Author}}</div>
-  <div><b>Class:</b> {{fish.Class}}</div>
-  <div><b>FBname:</b> {{fish.FBname}}</div>
-  <div><b>FamCode:</b> {{fish.FamCode}}</div>
-  <div><b>Family:</b> {{fish.Family}}</div>
-  <div><b>GenCode:</b> {{fish.GenCode}}</div>
-  <div><b>Genus:</b> {{fish.Genus}}</div>
-  <div><b>Order:</b> {{fish.Order}}</div>
-  <div><b>Remark:</b> {{fish.Remark}}</div>
-  <div><b>SpecCode:</b> {{fish.SpecCode}}</div>
-  <div><b>Species:</b> {{fish.Species}}</div>
-  <div><b>SpeciesRefNo:</b> {{fish.SpeciesRefNo}}</div>
-  <div><b>SubFamily:</b> {{fish.SubFamily}}</div>
-  <div><b>SubGenCode:</b> {{fish.SubGenCode}}</div>
+<div *ngIf="fish"
+     class="fish-info"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutGap="20px"
+     fxFlexFill>
 
-  <img *ngIf="fish.PicLink" src="{{fish.PicLink}}"/>
+  <div fxFlex="260px" fxFlex.sm="100">
+    <div>
+      <img class="fish-image" *ngIf="fish.PicLink" src="{{fish.PicLink}}" alt="{{fish.Genus + fish.Genus}}">
+      <img class="fish-image" *ngIf="!fish.PicLink" src="https://cdn.dribbble.com/users/372537/screenshots/2094822/icons_km_fish.gif" alt="N/A">
+    </div>
+    <div>
+      <a matTooltip="Opens google images" mat-button target="_blank" href="{{getGoogleImagesLink()}}">Google Images</a>
+    </div>
 
-  <a target="_blank" href="{{getGoogleImagesLink()}}">Google Images</a>
+  </div>
+
+  <div fxFlex="70" fxFlex.sm="100">
+    <ul>
+      <li>
+        <span *ngIf="fish.saltwater === 1" matTooltip="Saltwater">
+          <i class="fas fa-water"></i>
+        </span>
+        <span *ngIf="fish.saltwater !== 1" matTooltip="Freshwater">
+          <i class="fas fa-water"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
 
 </div>
 
