@@ -2,16 +2,22 @@
 <div fxLayout="row" 
   fxLayout.xs="column" 
   fxFlexFill>
+
   <div fxFlex="100">
-    <div *ngIf="pagination">
+    <div *ngIf="pagination.totalItems > (pagination.currentPage * pagination.itemsPerPage)">
       <pagination [pagination]="pagination" (pageChange)="changePage($event)"></pagination>
     </div>
 
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let fish of fishList; let last = last"
-                           [expanded]="fish.SpecCode === openedeFish"
-                           (opened)="openedeFish = fish.SpecCode"
-                           hideToggle>
+    <mat-progress-spinner
+      *ngIf="loading"
+      [color]="'accent'"
+      [mode]="'indeterminate'">
+    </mat-progress-spinner>
+
+    <mat-accordion *ngIf="!loading">
+      <mat-expansion-panel *ngFor="let fish of fishList"
+                           [expanded]="fish.SpecCode === openedFishSpecCode"
+                           (opened)="this.toggleFishOpen(fish)">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{fish.Genus}} {{fish.Species}}

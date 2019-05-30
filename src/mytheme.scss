@@ -16,7 +16,7 @@ $custom-typography: mat-typography-config(
 );
 
 @include angular-material-typography($custom-typography);
-@include fish-list-theme($my-theme);
+//@include fish-list-theme($my-theme);
 
 a:hover{
   // color : linear-gradient(to right, mat-color($primary, 400), mat-color($primary, 100));

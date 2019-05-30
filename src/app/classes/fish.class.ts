@@ -15,5 +15,7 @@ export class Fish {
   SubGenCode: null;
   PicPreferredName: string;
   PicLink: string;
+  Vulnerability: number; // 0 - 100
+  Comments: string;
 }
 

@@ -11,7 +11,7 @@ import {
   MatListModule,
   MatPaginatorModule,
   MatCardModule,
-  MatExpansionModule, MatTooltipModule
+  MatExpansionModule, MatTooltipModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,7 @@ import { FishlistComponent } from './components/fishlist/fishlist.component';
 import { InfoComponent } from './components/info/info.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { FishIconComponent } from './components/fishicon/fishicon.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     FishlistComponent,
     InfoComponent,
     NavigationComponent,
-    PaginationComponent
+    PaginationComponent,
+    FishIconComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     FlexLayoutModule,
     MatCardModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

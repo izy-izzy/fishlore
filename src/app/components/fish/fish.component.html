@@ -18,16 +18,14 @@
   </div>
 
   <div fxFlex="70" fxFlex.sm="100">
-    <ul>
-      <li>
-        <span *ngIf="fish.saltwater === 1" matTooltip="Saltwater">
-          <i class="fas fa-water"></i>
-        </span>
-        <span *ngIf="fish.saltwater !== 1" matTooltip="Freshwater">
-          <i class="fas fa-water"></i>
-        </span>
-      </li>
-    </ul>
+    <div>
+
+    </div>
+    <fish-icon [iconType]="'water-salinity'" [value]="fish.saltwater"></fish-icon>
+    <fish-icon [iconType]="'vulnerability'" [value]="fish.Vulnerability"></fish-icon>
+    <div>
+      <p class="comments">{{fish.Comments}}</p>
+    </div>
   </div>
 
 </div>

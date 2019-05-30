@@ -1,5 +1,16 @@
+@import './../../../variables.scss';
+
 .fish-info {
+
   .fish-image {
     max-width: 200px;
+  }
+
+  .comments {
+    margin-top: $margin;
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: $font-weight-book;
+
   }
 }

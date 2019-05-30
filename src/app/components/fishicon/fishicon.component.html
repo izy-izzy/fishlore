@@ -1,0 +1,29 @@
+<span *ngIf="iconTypeIsWaterSalinity()"
+  class="fish-icon water-salinity">
+  <span *ngIf="value === 1" matTooltip="Saltwater fish">
+    <i class="fas fa-water saltwater"></i>
+  </span>
+  <span *ngIf="value !== 1" matTooltip="Freshwater fish">
+    <i class="fas fa-water freshwater"></i>
+  </span>
+</span>
+
+<span *ngIf="iconTypeIsVulnerability()"
+      class="fish-icon vulnerability">
+  <span *ngIf="value < 10" matTooltip="Vulnerability: no">
+    <i class="fas fa-exclamation-circle none"></i>
+  </span>
+  <span *ngIf="value >= 10 && value < 25" matTooltip="Vulnerability: Low">
+    <i class="fas fa-exclamation-circle low"></i>
+  </span>
+  <span *ngIf="value >= 25 && value < 50" matTooltip="Vulnerability: Medium">
+    <i class="fas fa-exclamation-circle medium"></i>
+  </span>
+   <span *ngIf="value >= 50 && value < 80" matTooltip="Vulnerability: High">
+    <i class="fas fa-exclamation-circle high"></i>
+  </span>
+  <span *ngIf="value >= 80" matTooltip="Vulnerability: Extreme">
+    <i class="fas fa-exclamation-circle extreme"></i>
+  </span>
+</span>
+

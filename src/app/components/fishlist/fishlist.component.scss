@@ -1,34 +1,39 @@
 @import '~@angular/material/theming';
 @import './../../../variables.scss';
 
-@mixin fish-list-theme($theme) {
-  $primary: map-get($theme, primary);
-
-  .mat-list-item {
-    .mat-list-item-content {
-      justify-content: space-between
-    }
-
-    button {
-      transition: background-color 0.2s linear, color 0.2s linear;
-    }
-
-    &:hover {
-      background-color: mat-color($primary, 900);
-      button {
-        background-color: mat-color($primary, 300);
-        color: mat-color($primary, '300-contrast');
-      }
-    }
-
-    .name {
-      padding-right: $padding;
-    }
-
-    transition: background-color 0.2s linear, color 0.2s linear;
-    &.selected {
-      background-color: mat-color($primary, 400);
-      color: mat-color($primary, '100-contrast');
-    }
-  }
+.mat-progress-spinner {
+  position: absolute;
+  margin: auto;
 }
+
+//@mixin fish-list-theme($theme) {
+//  $primary: map-get($theme, primary);
+//
+//  .mat-list-item {
+//    .mat-list-item-content {
+//      justify-content: space-between
+//    }
+//
+//    button {
+//      transition: background-color 0.2s linear, color 0.2s linear;
+//    }
+//
+//    &:hover {
+//      background-color: mat-color($primary, 900);
+//      button {
+//        background-color: mat-color($primary, 300);
+//        color: mat-color($primary, '300-contrast');
+//      }
+//    }
+//
+//    .name {
+//      padding-right: $padding;
+//    }
+//
+//    transition: background-color 0.2s linear, color 0.2s linear;
+//    &.selected {
+//      background-color: mat-color($primary, 400);
+//      color: mat-color($primary, '100-contrast');
+//    }
+//  }
+//}

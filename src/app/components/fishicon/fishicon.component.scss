@@ -1,0 +1,42 @@
+@import './../../../variables.scss';
+
+$vulnerability-no-danger : #AAFF00;
+$vulnerability-low-danger: #FAFF00;
+$vulnerability-medium-danger: #FFBF00;
+$vulnerability-high-danger: #FF8800;
+$vulnerability-extreme-danger: #FF0000;
+
+$salinity-freshwater: greenyellow;
+$salinity-saltwater: aqua;
+
+.fish-icon {
+
+  margin: $margin;
+
+  &.water-salinity {
+    .saltwater {
+      color: $salinity-saltwater;
+    }
+    .freshwater {
+      color: $salinity-freshwater;
+    }
+  }
+
+  &.vulnerability {
+    .none {
+      color: $vulnerability-no-danger;
+    }
+    .low {
+      color: $vulnerability-low-danger;
+    }
+    .medium {
+      color: $vulnerability-medium-danger;
+    }
+    .high {
+      color: $vulnerability-high-danger;
+    }
+    .extreme {
+      color: $vulnerability-extreme-danger;
+    }
+  }
+}
