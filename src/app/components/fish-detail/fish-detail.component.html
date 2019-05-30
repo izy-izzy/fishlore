@@ -1,0 +1,13 @@
+<mat-progress-spinner
+  *ngIf="loading"
+  [color]="'accent'"
+  [mode]="'indeterminate'">
+</mat-progress-spinner>
+
+<div *ngIf="!loading">
+    SpecCode: {{fish.SpecCode}}
+    <fish-icon [iconType]="'water-salinity'" [saltwater]="fish.Saltwater" [brakish]="fish.Brakish"></fish-icon>
+    <fish-icon [iconType]="'vulnerability'" [vulnerability]="fish.Vulnerability"></fish-icon>
+    <fish-icon [iconType]="'length'" [length]="fish.Length"></fish-icon>
+    <fish-icon [iconType]="'weight'" [weight]="fish.Weight"></fish-icon>
+</div>

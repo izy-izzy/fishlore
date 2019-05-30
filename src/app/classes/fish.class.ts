@@ -17,5 +17,7 @@ export class Fish {
   PicLink: string;
   Vulnerability: number; // 0 - 100
   Comments: string;
+  Weight: number;
+  Length: number;
 }
 

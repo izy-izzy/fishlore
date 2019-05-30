@@ -1,29 +1,52 @@
 <span *ngIf="iconTypeIsWaterSalinity()"
   class="fish-icon water-salinity">
-  <span *ngIf="value === 1" matTooltip="Saltwater fish">
+  <span *ngIf="saltwater === -1" matTooltip="Saltwater fish">
     <i class="fas fa-water saltwater"></i>
   </span>
-  <span *ngIf="value !== 1" matTooltip="Freshwater fish">
+  <span *ngIf="saltwater === 0" matTooltip="Freshwater fish">
     <i class="fas fa-water freshwater"></i>
+  </span>
+  <span *ngIf="brakish === -1" matTooltip="Brakish fish">
+      <i class="fas fa-water brakish"></i>
+    </span>
+  <span *ngIf="saltwater !== 0 && saltwater !== -1 && brakish !== -1" matTooltip="Not defined if saltwater or freshwater">
+    <i class="fas fa-water"></i>
   </span>
 </span>
 
 <span *ngIf="iconTypeIsVulnerability()"
       class="fish-icon vulnerability">
-  <span *ngIf="value < 10" matTooltip="Vulnerability: no">
+  <span *ngIf="vulnerability < 10" matTooltip="Vulnerability: no">
     <i class="fas fa-exclamation-circle none"></i>
   </span>
-  <span *ngIf="value >= 10 && value < 25" matTooltip="Vulnerability: Low">
+  <span *ngIf="vulnerability >= 10 && vulnerability < 25" matTooltip="Vulnerability: Low">
     <i class="fas fa-exclamation-circle low"></i>
   </span>
-  <span *ngIf="value >= 25 && value < 50" matTooltip="Vulnerability: Medium">
+  <span *ngIf="vulnerability >= 25 && vulnerability < 50" matTooltip="Vulnerability: Medium">
     <i class="fas fa-exclamation-circle medium"></i>
   </span>
-   <span *ngIf="value >= 50 && value < 80" matTooltip="Vulnerability: High">
+   <span *ngIf="vulnerability >= 50 && vulnerability < 80" matTooltip="Vulnerability: High">
     <i class="fas fa-exclamation-circle high"></i>
   </span>
-  <span *ngIf="value >= 80" matTooltip="Vulnerability: Extreme">
+  <span *ngIf="vulnerability >= 80" matTooltip="Vulnerability: Extreme">
     <i class="fas fa-exclamation-circle extreme"></i>
   </span>
 </span>
 
+<span *ngIf="iconTypeIsLength()"
+      class="fish-icon length">
+  <span>
+    <i class="fas fa-ruler"></i>
+    <span *ngIf="length" class="data">{{length}} cm</span>
+    <span *ngIf="!length" class="data">N/A</span>
+  </span>
+</span>
+
+<span *ngIf="iconTypeIsWeight()"
+      class="fish-icon weight">
+  <span>
+    <i class="fas fa-weight"></i>
+    <span *ngIf="weight" class="data">{{weight}} kg</span>
+    <span *ngIf="!weight" class="data">N/A</span>
+  </span>
+</span>

@@ -6,6 +6,7 @@ import { IPagination } from '../pagination/pagination.component';
 import { PageEvent } from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {FishlistService} from '../../services/fishlist.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'fish-list',
@@ -22,7 +23,8 @@ export class FishlistComponent implements OnInit {
 
   constructor(private fishstore: FishstoreService,
               private activatedRoute: ActivatedRoute,
-              private fishlistService: FishlistService) { }
+              private fishlistService: FishlistService,
+              private location: Location) { }
 
   ngOnInit() {
     [this.pagination, this.openedFishSpecCode] = this.fishlistService.getSavedParamsAndPagination();
@@ -46,7 +48,15 @@ export class FishlistComponent implements OnInit {
     this.saveParameters();
   }
 
+  public toggleFishClose(fish: Fish): void {
+    this.openedFishSpecCode === fish.SpecCode ? this.openedFishSpecCode = undefined: undefined;
+    this.saveParameters();
+  }
+
   public saveParameters(): void {
+    let url: string = `/fishlist/${this.pagination.currentPage}/${this.pagination.itemsPerPage}`;
+    url = this.openedFishSpecCode ? `${url}/${this.openedFishSpecCode}` : url;
+    this.location.go(url);
     this.fishlistService.saveSearchParamsAndPagination(this.pagination, this.openedFishSpecCode);
   }
 

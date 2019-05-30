@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {FishlistComponent} from './components/fishlist/fishlist.component';
 import {InfoComponent} from './components/info/info.component';
+import { FishDetailComponent } from './components/fish-detail/fish-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/info', pathMatch: 'full' },
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'fishlist/:currentPage', component: FishlistComponent },
   { path: 'fishlist/:currentPage/:itemsPerPage', component: FishlistComponent },
   { path: 'fishlist/:currentPage/:itemsPerPage/:openedFishSpecCode', component: FishlistComponent },
+  { path: 'fishdetail/:specCode', component: FishDetailComponent }
 ];
 
 @NgModule({

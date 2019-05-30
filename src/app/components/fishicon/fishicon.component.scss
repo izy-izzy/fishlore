@@ -6,12 +6,18 @@ $vulnerability-medium-danger: #FFBF00;
 $vulnerability-high-danger: #FF8800;
 $vulnerability-extreme-danger: #FF0000;
 
-$salinity-freshwater: greenyellow;
-$salinity-saltwater: aqua;
+$salinity-freshwater: #AAFFBB;
+$salinity-brakish: #CCFFFF;
+$salinity-saltwater: #00BBFF;
+
 
 .fish-icon {
 
   margin: $margin;
+
+  .data {
+    padding-left: $padding;
+  }
 
   &.water-salinity {
     .saltwater {
@@ -19,6 +25,9 @@ $salinity-saltwater: aqua;
     }
     .freshwater {
       color: $salinity-freshwater;
+    }
+    .brakish {
+      color: $salinity-brakish;
     }
   }
 

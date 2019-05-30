@@ -4,3 +4,15 @@ $margin: 10px;
 $font-weight-light: 300;
 $font-weight-book: 400;
 $font-weight-medium: 500;
+
+$flex-fx-screen-xs-min: 0px;
+$flex-fx-screen-xs-max: 599px;
+$flex-fx-screen-sm-min: $flex-fx-screen-xs-max + 1;
+$flex-fx-screen-sm-max: 1023px;
+$flex-fx-screen-md-min: $flex-fx-screen-sm-max + 1;
+$flex-fx-screen-md-max: 1439px;
+$flex-fx-screen-lg-min: $flex-fx-screen-md-max + 1;
+$flex-fx-screen-lg-max: 1919px;
+$flex-fx-screen-xl-min: $flex-fx-screen-lg-max + 1;
+$flex-fx-screen-xl-max: 10000px;
+

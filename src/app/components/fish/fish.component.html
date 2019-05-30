@@ -6,10 +6,15 @@
      fxLayoutGap="20px"
      fxFlexFill>
 
-  <div fxFlex="260px" fxFlex.sm="100">
+  <div fxFlex="initial" 
+    fxFlex.xs="100"
+    fxLayout="column"
+    fxLayout.xs="row"
+    fxLayoutGap="0px"
+    fxLayoutGap.xs="20px">
     <div>
       <img class="fish-image" *ngIf="fish.PicLink" src="{{fish.PicLink}}" alt="{{fish.Genus + fish.Genus}}">
-      <img class="fish-image" *ngIf="!fish.PicLink" src="https://cdn.dribbble.com/users/372537/screenshots/2094822/icons_km_fish.gif" alt="N/A">
+      <img class="fish-image no-image" *ngIf="!fish.PicLink" src="/assets/images/no_fish_image.png" alt="N/A">
     </div>
     <div>
       <a matTooltip="Opens google images" mat-button target="_blank" href="{{getGoogleImagesLink()}}">Google Images</a>
@@ -17,14 +22,21 @@
 
   </div>
 
-  <div fxFlex="70" fxFlex.sm="100">
+  <div fxFlex="initial" fxFlex.xs="100">
     <div>
 
     </div>
-    <fish-icon [iconType]="'water-salinity'" [value]="fish.saltwater"></fish-icon>
-    <fish-icon [iconType]="'vulnerability'" [value]="fish.Vulnerability"></fish-icon>
+    <fish-icon [iconType]="'water-salinity'" [saltwater]="fish.Saltwater" [brakish]="fish.Brakish"></fish-icon>
+    <fish-icon [iconType]="'vulnerability'" [vulnerability]="fish.Vulnerability"></fish-icon>
+    <fish-icon [iconType]="'length'" [length]="fish.Length"></fish-icon>
+    <fish-icon [iconType]="'weight'" [weight]="fish.Weight"></fish-icon>
+    
     <div>
       <p class="comments">{{fish.Comments}}</p>
+    </div>
+
+    <div>
+      <a mat-button href="/fishdetail/{{fish.SpecCode}}">Detail Information</a>
     </div>
   </div>
 

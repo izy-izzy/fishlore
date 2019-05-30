@@ -1,0 +1,9 @@
+@import './../../../variables.scss';
+
+.app-header {
+    margin-bottom: $margin;
+    
+    .logo {
+        width: 60px;   
+    }
+}

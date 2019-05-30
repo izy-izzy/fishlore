@@ -1,9 +1,10 @@
 
 <div fxLayout="row" 
   fxLayout.xs="column" 
-  fxFlexFill>
+  fxFlexFill
+  fxFlex="auto">
 
-  <div fxFlex="100">
+  <div>
     <div *ngIf="pagination.totalItems > (pagination.currentPage * pagination.itemsPerPage)">
       <pagination [pagination]="pagination" (pageChange)="changePage($event)"></pagination>
     </div>
@@ -17,7 +18,8 @@
     <mat-accordion *ngIf="!loading">
       <mat-expansion-panel *ngFor="let fish of fishList"
                            [expanded]="fish.SpecCode === openedFishSpecCode"
-                           (opened)="this.toggleFishOpen(fish)">
+                           (opened)="this.toggleFishOpen(fish)"
+                           (closed)="this.toggleFishClose(fish)">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{fish.Genus}} {{fish.Species}}

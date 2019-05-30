@@ -20,8 +20,8 @@ export class FishbaseService {
 
   constructor(private http: HttpClient) { }
 
-  public getFish(id: number): Observable<Fish[]> {
-    return this.http.get<Fish[]>(this.fishBaseUrl + '/' + id);
+  public getFish(specCode: number): Observable<IFishDataResponse> {
+    return this.http.get<IFishDataResponse>(this.fishBaseUrl + '/' + specCode);
   }
 
   public getFishList(limit: number, offset: number): Observable<IFishDataResponse> {
