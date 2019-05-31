@@ -14,6 +14,7 @@ export class FishDetailComponent implements OnInit {
   private fishSpecCode: number;
   private dataSubscription: Subscription;
   private fish: Fish;
+  public loading: boolean;
 
   constructor(
     private activatedRoute:ActivatedRoute,
