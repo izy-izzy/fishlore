@@ -5,9 +5,15 @@ import { Subscription, noop } from 'rxjs';
 import { PageEvent } from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FishlistService} from '../../services/fishlist.service';
-import {Location} from '@angular/common';
 import { IPagination } from 'src/app/shared/components/pagination/pagination.component';
 import { IFishListRouteParams } from '../../fish-routing.module';
+import { IFishSearchTaxonomyParams, IFishBaseErrorCode } from '../../services/fishbase.service';
+
+export const enum IFishListSearchType {
+  SPECIES = 'Species',
+  GENUS = 'Genus',
+  ANY = 'Any'
+}
 
 @Component({
   selector: 'fish-list',
@@ -20,7 +26,10 @@ export class FishlistComponent implements OnInit {
   private listSubscription: Subscription;
   public openedFishSpecCode: number;
   public pagination: IPagination;
+  public query: string;
+  public searchType: IFishListSearchType;
   public loading = false;
+  public errorMessage: string;
 
   constructor(private fishstore: FishstoreService,
               private activatedRoute: ActivatedRoute,
@@ -32,6 +41,7 @@ export class FishlistComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.pagination.currentPage = params.currentPage ? Number(params.currentPage) : this.pagination.currentPage;
       this.pagination.itemsPerPage = params.itemsPerPage ? Number(params.itemsPerPage) : this.pagination.itemsPerPage;
+      this.query = params.query ? params.query : this.query;
       this.openedFishSpecCode = params.openedFishSpecCode ? Number(params.openedFishSpecCode) : this.openedFishSpecCode;
     });
     this.updateFishList();
@@ -59,7 +69,8 @@ export class FishlistComponent implements OnInit {
       currentPage: this.pagination.currentPage.toString(),
       itemsPerPage: this.pagination.itemsPerPage.toString()
     }
-    this.openedFishSpecCode ? params.openedFishSpecCode = this.openedFishSpecCode.toString() : noop;
+    params.query = this.query ? this.query : '';
+    params.openedFishSpecCode = this.openedFishSpecCode ? this.openedFishSpecCode.toString() : '';
     
     this.router.navigate(
       [], 
@@ -68,23 +79,54 @@ export class FishlistComponent implements OnInit {
         queryParams: params, 
         queryParamsHandling: "merge", // remove to replace all query params by provided
       });
-    this.fishlistService.saveSearchParamsAndPagination(this.pagination, this.openedFishSpecCode);
+    this.fishlistService.saveSearchParamsAndPagination(this.pagination, this.openedFishSpecCode, this.query);
   }
+
+  public seachQueryChanged(queryValue: string): void { 
+    this.query = queryValue;
+    this.updateFishList();
+  }
+
+  public searchTypeChanged(event: MouseEvent): void {
+    this.updateFishList();
+  }
+
+  private getSeachParmeters(): IFishSearchTaxonomyParams {
+    const params: IFishSearchTaxonomyParams = {
+      limit: this.pagination.itemsPerPage,
+      offset: this.pagination.itemsPerPage * this.pagination.currentPage
+    }
+    if (this.query) {
+      this.searchType === IFishListSearchType.SPECIES ? params.Species = this.query : noop;
+      this.searchType === IFishListSearchType.GENUS ? params.Genus = this.query : noop;
+    }
+    return params;
+  }
+
 
   private updateFishList(): void {
     this.saveParameters();
     this.loading = true;
-    this.listSubscription = this.fishstore.getFishList(this.pagination.currentPage, this.pagination.itemsPerPage)
+    const params = this.getSeachParmeters();
+    this.listSubscription = this.fishstore.getFishList(params)
       .subscribe(
         (response) => {
           this.fishList = response.data;
-          this.pagination.totalItems = response.count;
+          this.pagination.totalItems = response.count + params.offset;
           if (this.pagination.currentPage > (this.pagination.totalItems / this.pagination.itemsPerPage)) {
             this.pagination.currentPage = 0;
             this.updateFishList();
           }
-        }, (error) => {
-          alert(error); // should be better
+          this.errorMessage = undefined;
+        }, (data) => {
+          this.fishList = undefined;
+          this.pagination.currentPage = 0;
+          this.pagination.totalItems = 0;
+          if (data.status === IFishBaseErrorCode.NOT_FOUND) {
+            this.errorMessage = data.error.error.message;
+          }
+          this.loading = false;
+          this.listSubscription.unsubscribe();
         }, () => {
           this.loading = false;
           this.listSubscription.unsubscribe();

@@ -41,4 +41,8 @@ export class FishDetailComponent implements OnInit {
       });
   }
 
+  public getGoogleImagesLink(): string {
+    return 'https://www.google.com/search?q='+ this.fish.Genus + '+' +this.fish.Species + '&source=lnms&tbm=isch&sa=X';
+  }
+
 }

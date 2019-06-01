@@ -14,18 +14,20 @@ export class FishlistService {
     pageSizeOptions: [5, 10, 20, 100]
   };
   private lastOpenedFishSpecCode: number;
+  private query: string;
 
   constructor() {
     this.savedPagination = {...this.defaultPagination};
   }
 
-  public saveSearchParamsAndPagination(pagination: IPagination, openedFishSpecCode: number): void {
+  public saveSearchParamsAndPagination(pagination: IPagination, openedFishSpecCode: number, query: string): void {
     this.savedPagination = pagination;
     this.lastOpenedFishSpecCode = openedFishSpecCode;
+    this.query = query;
   }
 
-  public getSavedParamsAndPagination(): [IPagination, number] {
-    return [this.savedPagination, this.lastOpenedFishSpecCode];
+  public getSavedParamsAndPagination(): [IPagination, number, string] {
+    return [this.savedPagination, this.lastOpenedFishSpecCode, this.query];
   }
 
 }

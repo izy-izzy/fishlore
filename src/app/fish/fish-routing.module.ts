@@ -7,14 +7,12 @@ export interface IFishListRouteParams {
   currentPage? : string,
   itemsPerPage? : string,
   openedFishSpecCode? : string,
+  query?: string
 }
 
 const routes: Routes = [
   { path: '', redirectTo: 'list' },
   { path: 'list', component: FishlistComponent },
-  // { path: 'list/:currentPage', component: FishlistComponent },
-  // { path: 'list/:currentPage/:itemsPerPage', component: FishlistComponent },
-  // { path: 'list/:currentPage/:itemsPerPage/:openedFishSpecCode', component: FishlistComponent },
   { path: 'fishdetail/:specCode', component: FishDetailComponent }
 ];
 

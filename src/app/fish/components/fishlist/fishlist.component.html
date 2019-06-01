@@ -1,35 +1,52 @@
 
 <div>
-
+ 
   <div>
-    <div *ngIf="pagination.totalItems > (pagination.currentPage * pagination.itemsPerPage)">
-      <pagination [pagination]="pagination" (pageChange)="changePage($event)"></pagination>
-    </div>
-
-    <mat-progress-spinner
-      *ngIf="loading"
-      [color]="'accent'"
-      [mode]="'indeterminate'">
-    </mat-progress-spinner>
-
-    <mat-accordion *ngIf="!loading">
-      <mat-expansion-panel *ngFor="let fish of fishList"
-                           [expanded]="fish.SpecCode === openedFishSpecCode"
-                           (opened)="this.toggleFishOpen(fish)"
-                           (closed)="this.toggleFishClose(fish)">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{fish.Genus}} {{fish.Species}}
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <fish-info [fish]="fish"></fish-info>
-      </mat-expansion-panel>
-    </mat-accordion>
-
+    <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="searchType" (click)="searchTypeChanged($event)">
+      <mat-button-toggle value="Species" aria-label="Species">
+        Species
+      </mat-button-toggle>
+      <mat-button-toggle value="Genus" aria-label="Genus">
+        Genus
+      </mat-button-toggle>
+      <mat-button-toggle value="Any" aria-label="Any" disabled>
+        Any
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <searchbar (searchEvent)="seachQueryChanged($event)" [query]="query"></searchbar>
   </div>
+ 
+
+  <div *ngIf="pagination.totalItems > (pagination.currentPage * pagination.itemsPerPage)">
+    <pagination [pagination]="pagination" (pageChange)="changePage($event)"></pagination>
+  </div>
+
+  <mat-progress-spinner
+    *ngIf="loading"
+    [color]="'accent'"
+    [mode]="'indeterminate'">
+  </mat-progress-spinner>
+
+  <div *ngIf="errorMessage"> {{errorMessage}} </div>
+
+  <mat-accordion *ngIf="!loading">
+    <mat-expansion-panel *ngFor="let fish of fishList"
+                          [expanded]="fish.SpecCode === openedFishSpecCode"
+                          (opened)="this.toggleFishOpen(fish)"
+                          (closed)="this.toggleFishClose(fish)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{fish.Genus}} {{fish.Species}}
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        <a mat-button routerLink="/fish/fishdetail/{{fish.SpecCode}}">Detail Information</a>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 
 

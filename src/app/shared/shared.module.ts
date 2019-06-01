@@ -13,10 +13,11 @@ import {
   MatListModule,
   MatPaginatorModule,
   MatCardModule,
-  MatExpansionModule, MatTooltipModule, MatProgressSpinnerModule, MatToolbarModule
+  MatExpansionModule, MatTooltipModule, MatProgressSpinnerModule, MatToolbarModule, MatIconModule, MatButtonToggleModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     NavigationComponent,
     PaginationComponent,
     FishIconComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchbarComponent
   ],
   imports: [
     RouterModule,
@@ -40,13 +42,18 @@ import { RouterModule } from '@angular/router';
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   exports: [
     NavigationComponent,
     PaginationComponent,
     FishIconComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchbarComponent
   ]
 })
 export class SharedModule { }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Fish } from '../classes/fish.class';
-import { FishbaseService, IFishDataResponse } from './fishbase.service';
+import { Fish, FishExtended } from '../classes/fish.class';
+import { FishbaseService, IFishSearchTaxonomyParams, IFishTaxonomySearchResponse, IFishSpeciesSearchResponse } from './fishbase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class FishstoreService {
 
   constructor(private fishAPI: FishbaseService) { }
 
-  public getFishDetail(specCode: number): Observable<IFishDataResponse> {
+  public getFishDetail(specCode: number): Observable<IFishSpeciesSearchResponse> {
     return this.fishAPI.getFish(specCode)
       .pipe(map((response) => {
         this.postprocessFishDataResponse(response);
@@ -19,21 +19,17 @@ export class FishstoreService {
       }));
   }
 
-  public getFishList(page: number, perpage: number): Observable<IFishDataResponse> {
-    return this.fishAPI.getFishList(perpage, page * perpage)
-      .pipe(map((response) => {
-          this.postprocessFishDataResponse(response);
-          return response;
-      }));
+  public getFishList(params: IFishSearchTaxonomyParams): Observable<IFishTaxonomySearchResponse> {
+    return this.fishAPI.getFishList(params)
   }
 
-  private postprocessFishDataResponse(response: IFishDataResponse): void {
+  private postprocessFishDataResponse(response: IFishSpeciesSearchResponse): void {
     response.data.forEach((fish) => {
       fish.PicLink = this.getPrefferedImage(fish);
     })
   }
 
-  public getPrefferedImage(fish: Fish): string {
+  public getPrefferedImage(fish: FishExtended): string {
     return fish.PicPreferredName ? 'https://www.fishbase.de/images/thumbnails/' + this.getTypeOfPicture(fish.PicPreferredName) + '/tn_' + fish.PicPreferredName : undefined;
   }
 

@@ -11,3 +11,13 @@
     <fish-icon [iconType]="'length'" [length]="fish.Length"></fish-icon>
     <fish-icon [iconType]="'weight'" [weight]="fish.Weight"></fish-icon>
 </div>
+
+<div>
+  <a matTooltip="Opens google images" mat-button target="_blank" href="{{getGoogleImagesLink()}}">Google Images</a>
+</div>
+
+<div>
+  <img class="fish-image" *ngIf="fish.PicLink" src="{{fish.PicLink}}" alt="{{fish.Genus + fish.Genus}}">
+  <img class="fish-image no-image" *ngIf="!fish.PicLink" src="/assets/images/no_fish_image.png" alt="N/A">
+</div>
+

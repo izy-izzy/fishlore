@@ -12,7 +12,10 @@ export class Fish {
   Species: string;
   SpeciesRefNo: number;
   SubFamily: string;
-  SubGenCode: null;
+  SubGenCode: null
+}
+
+export class FishExtended extends Fish {
   PicPreferredName: string;
   PicLink: string;
   Vulnerability: number; // 0 - 100
