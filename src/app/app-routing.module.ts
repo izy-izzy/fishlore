@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {FishlistComponent} from './components/fishlist/fishlist.component';
-import {InfoComponent} from './components/info/info.component';
-import { FishDetailComponent } from './components/fish-detail/fish-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/info', pathMatch: 'full' },
-  { path: 'info', component: InfoComponent },
-  { path: 'fishlist', component: FishlistComponent },
-  { path: 'fishlist/:currentPage', component: FishlistComponent },
-  { path: 'fishlist/:currentPage/:itemsPerPage', component: FishlistComponent },
-  { path: 'fishlist/:currentPage/:itemsPerPage/:openedFishSpecCode', component: FishlistComponent },
-  { path: 'fishdetail/:specCode', component: FishDetailComponent }
+  { path: '', 
+    redirectTo: '/info', 
+    pathMatch: 'full' },
+  { path: 'info', 
+    loadChildren: () => import('./global/global.module')
+      .then(mod => mod.GlobalModule) },
+  { path: 'fish',
+    loadChildren: () => import('./fish/fish.module')
+      .then(mod => mod.FishModule) },
 ];
 
 @NgModule({

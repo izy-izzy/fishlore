@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FishstoreService } from 'src/app/services/fishstore.service';
 import { Subscription } from 'rxjs';
-import { Fish } from 'src/app/classes/fish.class';
+import { FishstoreService } from '../../services/fishstore.service';
+import { Fish } from '../../classes/fish.class';
 
 @Component({
   selector: 'fish-detail',

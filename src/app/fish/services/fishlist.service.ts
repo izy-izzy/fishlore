@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IPagination} from '../components/pagination/pagination.component';
+import { IPagination } from 'src/app/shared/components/pagination/pagination.component';
 
 @Injectable({
   providedIn: 'root'

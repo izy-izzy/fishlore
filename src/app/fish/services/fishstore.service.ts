@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {FishbaseService, IFishDataResponse} from './api/fishbase.service';
 import { Fish } from '../classes/fish.class';
+import { FishbaseService, IFishDataResponse } from './fishbase.service';
 
 @Injectable({
   providedIn: 'root'
