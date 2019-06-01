@@ -1,5 +1,9 @@
 # FishlistApp
 
+Simple commected to a : http://fishbase.org.
+
+ONGOING PROBLEMS: How to make a routerLink in submodule without know under what '/path' it has been inserted under lazy-loading.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
 
 ## Development server
