@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomFishService } from '../../services/custom-fish.service';
 import { Fish } from '../../classes/fish.class';
+import { Subscription, noop } from 'rxjs';
 
 @Component({
   selector: 'app-custom-fish-list',
@@ -10,16 +11,20 @@ import { Fish } from '../../classes/fish.class';
 export class CustomFishListComponent implements OnInit {
 
   public fishList: Fish[];
+  public subscription: Subscription;
 
-  constructor(private db: CustomFishService) { 
+  constructor(private customFishService: CustomFishService) { 
   }
 
   ngOnInit() {
-    this.db.getFishList().subscribe((list: Fish[]) => {
-      this.fishList = list;
-      console.log(this.fishList);
-    })
-
+    this.subscription = this.customFishService.getFishList()
+      .subscribe((list: Fish[]) => {
+        this.fishList = list;
+      });
   }
 
+  ngOnDestroy() {
+    this.subscription ? this.subscription.unsubscribe() : noop();
+  }
+  
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, Observable, noop } from 'rxjs';
+import { Subscription, noop } from 'rxjs';
 import { FishstoreService } from '../../services/fishstore.service';
 import { Fish } from '../../classes/fish.class';
-import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
 import { CustomFishService } from '../../services/custom-fish.service';
+import { ModalMessageDialogComponent } from 'src/app/shared/components/modal-message/modal-message.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'fish-detail',
@@ -23,7 +24,8 @@ export class FishDetailComponent implements OnInit {
   constructor(
     private activatedRoute:ActivatedRoute,
     private fishStore: FishstoreService,
-    private db: CustomFishService
+    private customFishService: CustomFishService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class FishDetailComponent implements OnInit {
   }
 
   private loadCustomFishData(specCode: number) {
-    this.customFishSubscription = this.db.getCustomFishItem(specCode)
+    this.customFishSubscription = this.customFishService.getCustomFishItem(specCode)
       .subscribe((data) => {
         if (data.length > 0){
           this.customFishData = data[0];
@@ -55,12 +57,20 @@ export class FishDetailComponent implements OnInit {
     this.dataSubscription = this.fishStore.getFishDetail(specCode)
       .subscribe((data) => {
         this.fish = data.data[0];
+        this.openDialog('Data loaded successful');
       }, (error) => {
-        // DNK NOW
+        this.openDialog(error);
       }, () => {
         this.loading = false;
         this.dataSubscription.unsubscribe();
       });
+  }
+
+  private openDialog(message: string): void {
+    const dialogRef = this.dialog.open(ModalMessageDialogComponent, {
+      width: '450px',
+      data: message
+    });
   }
 
   public getGoogleImagesLink(): string {
@@ -68,15 +78,15 @@ export class FishDetailComponent implements OnInit {
   }
 
   public addCustomFishData() : void {
-    this.db.addCustomFishData(this.fish);
+    this.customFishService.addCustomFishData(this.fish);
   }
 
   public removeCustomFishData() : void{
-    this.db.removeCustomFishData(this.fish);
+    this.customFishService.removeCustomFishData(this.fish);
   }
 
   public overideCustomFishData() : void {
-    this.db.overideCustomFishData(this.fish);
+    this.customFishService.overideCustomFishData(this.fish);
   }
   
 }
