@@ -10,7 +10,7 @@ const routes: Routes = [
       .then(mod => mod.GlobalModule) },
   { path: 'fish',
     loadChildren: () => import('./fish/fish.module')
-      .then(mod => mod.FishModule) },
+      .then(mod => mod.FishModule) }
 ];
 
 @NgModule({

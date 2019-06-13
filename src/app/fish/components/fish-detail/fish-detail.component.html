@@ -21,3 +21,11 @@
   <img class="fish-image no-image" *ngIf="!fish.PicLink" src="/assets/images/no_fish_image.png" alt="N/A">
 </div>
 
+<div>
+  Custom Fish Database:
+  <br/>
+  <button mat-button *ngIf="customFishData" (click)="removeCustomFishData()" color="accent">Delete</button>
+  <button mat-button *ngIf="!customFishData" (click)="addCustomFishData()" color="accent">Add</button>
+  <button mat-button *ngIf="customFishData" (click)="overideCustomFishData()" color="warm">Override</button>
+</div>
+

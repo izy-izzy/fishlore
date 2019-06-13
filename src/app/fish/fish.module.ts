@@ -8,11 +8,13 @@ import { MatProgressSpinnerModule, MatExpansionModule, MatButtonModule, MatButto
 import { SharedModule } from '../shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { CustomFishListComponent } from './components/custom-fish-list/custom-fish-list.component';
 
 @NgModule({
   declarations: [
     FishDetailComponent,
-    FishlistComponent
+    FishlistComponent,
+    CustomFishListComponent
   ],
   imports: [
     SharedModule,
