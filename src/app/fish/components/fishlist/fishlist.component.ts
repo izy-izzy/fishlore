@@ -43,6 +43,7 @@ export class FishlistComponent implements OnInit {
       this.pagination.itemsPerPage = params.itemsPerPage ? Number(params.itemsPerPage) : this.pagination.itemsPerPage;
       this.query = params.query ? params.query : this.query;
       this.openedFishSpecCode = params.openedFishSpecCode ? Number(params.openedFishSpecCode) : this.openedFishSpecCode;
+      this.searchType = params.searchType ? params.searchType : this.searchType;
     });
     this.updateFishList();
 
@@ -71,6 +72,7 @@ export class FishlistComponent implements OnInit {
     }
     params.query = this.query ? this.query : '';
     params.openedFishSpecCode = this.openedFishSpecCode ? this.openedFishSpecCode.toString() : '';
+    params.searchType = this.searchType ? this.searchType : undefined;
     
     this.router.navigate(
       [], 

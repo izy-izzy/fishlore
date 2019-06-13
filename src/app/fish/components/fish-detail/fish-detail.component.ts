@@ -57,7 +57,6 @@ export class FishDetailComponent implements OnInit {
     this.dataSubscription = this.fishStore.getFishDetail(specCode)
       .subscribe((data) => {
         this.fish = data.data[0];
-        this.openDialog('Data loaded successful');
       }, (error) => {
         this.openDialog(error);
       }, () => {
