@@ -4,17 +4,19 @@ import { CommonModule } from '@angular/common';
 import { FishRoutingModule } from './fish-routing.module';
 import { FishDetailComponent } from './components/fish-detail/fish-detail.component';
 import { FishlistComponent } from './components/fishlist/fishlist.component';
-import { MatProgressSpinnerModule, MatExpansionModule, MatButtonModule, MatButtonToggleModule} from '@angular/material';
+import { MatProgressSpinnerModule, MatExpansionModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatProgressBarModule} from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { CustomFishListComponent } from './components/custom-fish-list/custom-fish-list.component';
+import { FishCardComponent } from './components/fish-card/fish-card.component';
 
 @NgModule({
   declarations: [
     FishDetailComponent,
     FishlistComponent,
-    CustomFishListComponent
+    CustomFishListComponent,
+    FishCardComponent
   ],
   imports: [
     SharedModule,
@@ -25,7 +27,9 @@ import { CustomFishListComponent } from './components/custom-fish-list/custom-fi
     MatExpansionModule,
     MatButtonModule,
     FlexLayoutModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatCardModule,
+    MatProgressBarModule
   ]
 })
 export class FishModule { }

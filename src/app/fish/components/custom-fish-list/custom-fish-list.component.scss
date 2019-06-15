@@ -1,0 +1,17 @@
+@import './../../../../variables.scss';
+
+.custom-fish-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: $margin;
+    grid-row-gap: $margin;
+    grid-auto-rows: auto;
+}
+
+.custom-fish-list-update {
+  margin-bottom: $margin;   
+
+  .fish-list-update-progress-bar {
+      margin-top: $margin;
+  }
+}

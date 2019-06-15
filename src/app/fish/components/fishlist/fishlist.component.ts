@@ -8,6 +8,7 @@ import {FishlistService} from '../../services/fishlist.service';
 import { IPagination } from 'src/app/shared/components/pagination/pagination.component';
 import { IFishListRouteParams } from '../../fish-routing.module';
 import { IFishSearchTaxonomyParams, IFishBaseErrorCode } from '../../services/fishbase.service';
+import { take } from 'rxjs/operators';
 
 export const enum IFishListSearchType {
   SPECIES = 'Species',
@@ -23,7 +24,6 @@ export const enum IFishListSearchType {
 export class FishlistComponent implements OnInit {
 
   public fishList: Fish[];
-  private listSubscription: Subscription;
   public openedFishSpecCode: number;
   public pagination: IPagination;
   public query: string;
@@ -38,7 +38,7 @@ export class FishlistComponent implements OnInit {
 
   ngOnInit() {
     [this.pagination, this.openedFishSpecCode] = this.fishlistService.getSavedParamsAndPagination();
-    this.activatedRoute.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.pipe(take(1)).subscribe((params) => {
       this.pagination.currentPage = params.currentPage ? Number(params.currentPage) : this.pagination.currentPage;
       this.pagination.itemsPerPage = params.itemsPerPage ? Number(params.itemsPerPage) : this.pagination.itemsPerPage;
       this.query = params.query ? params.query : this.query;
@@ -110,7 +110,7 @@ export class FishlistComponent implements OnInit {
     this.saveParameters();
     this.loading = true;
     const params = this.getSeachParmeters();
-    this.listSubscription = this.fishstore.getFishList(params)
+    this.fishstore.getFishList(params).pipe(take(1))
       .subscribe(
         (response) => {
           this.fishList = response.data;
@@ -127,11 +127,9 @@ export class FishlistComponent implements OnInit {
           if (data.status === IFishBaseErrorCode.NOT_FOUND) {
             this.errorMessage = data.error.error.message;
           }
+        },
+        () => {
           this.loading = false;
-          this.listSubscription.unsubscribe();
-        }, () => {
-          this.loading = false;
-          this.listSubscription.unsubscribe();
         }
       );
   }

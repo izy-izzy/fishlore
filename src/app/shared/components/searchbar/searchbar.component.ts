@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter, Input , OnDestroy} from '@angular/core';
+import { Subject, Subscription, noop } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
@@ -12,6 +12,7 @@ export class SearchbarComponent implements OnInit {
   
   private activeQuery: string = '';
   inputChanged: Subject<string> = new Subject<string>();
+  private inputChangedSubscription: Subscription;
 
   @Input() query: string;
   @Output() searchEvent = new EventEmitter<string>();
@@ -19,7 +20,7 @@ export class SearchbarComponent implements OnInit {
   constructor() { }
   
   ngOnInit() {
-    this.inputChanged
+    this.inputChangedSubscription = this.inputChanged
       .pipe(
         debounceTime(300),
         distinctUntilChanged() 
@@ -29,6 +30,10 @@ export class SearchbarComponent implements OnInit {
       });
 
     this.activeQuery = this.query;
+  }
+
+  ngOnDestroy() {
+    this.inputChangedSubscription ? this.inputChangedSubscription.unsubscribe() : noop();
   }
 
   public onQueryChange(event: Event): void {

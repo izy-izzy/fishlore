@@ -1,3 +1,30 @@
-<li class="text" *ngFor="let item of fishList">
-  {{item.Genus}} {{item.Species}}
-</li>
+<div class="custom-fish-list-update">
+  <button mat-button [disabled]="!fishList" (click)="updateAllFishFromFishDB()">Update all fish</button>
+  <div>
+      <small *ngIf="updateProgress && !updateProgress.finished">Processing: (activeWorkers: {{updateProgress.activeWorkers}}) {{updateProgress.processedItems[updateProgress.processedItems.length - 1]}}</small>
+      <small *ngIf="updateProgress && updateProgress.finished">Finished!</small>   
+  </div>
+  <mat-progress-bar
+    class="fish-list-update-progress-bar"
+    *ngIf="updateProgress && !updateProgress.finished"
+    [color]="primary"
+    [mode]="buffer"
+    [value]="(updateProgress.processed / updateProgress.total) * 100"
+    [bufferValue]="(updateProgress.started / updateProgress.total) * 100">
+  </mat-progress-bar>
+
+  <div *ngIf="updateProgress">
+    <div *ngFor="let error of updateProgress.errors">
+      <div>ERROR: {{error}}</div>
+    </div>  
+  </div>
+  
+</div>
+
+<div class="custom-fish-list">
+  <div class="custom-fish-list-item" 
+    *ngFor="let fish of fishList">
+    <fish-card [fish]="fish"> </fish-card>
+  </div>
+
+</div>

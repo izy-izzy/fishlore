@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { ModalMessageDialogComponent } from './components/modal-message/modal-message.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ModalMessageDialogComponent } from './components/modal-message/modal-me
     FishIconComponent,
     HeaderComponent,
     SearchbarComponent,
-    ModalMessageDialogComponent
+    ModalMessageDialogComponent,
+    TruncatePipe
   ],
   imports: [
     RouterModule,
@@ -57,7 +59,8 @@ import { ModalMessageDialogComponent } from './components/modal-message/modal-me
     FishIconComponent,
     HeaderComponent,
     SearchbarComponent,
-    ModalMessageDialogComponent
+    ModalMessageDialogComponent,
+    TruncatePipe
   ],
   entryComponents: [ModalMessageDialogComponent]
 })

@@ -1,0 +1,38 @@
+@import './../../../../variables.scss';
+
+.fish-card {
+    padding: 0;
+    height: 100%;
+
+    .mat-card-actions, .mat-card-content, .mat-card-subtitle {
+        margin-bottom: 0;
+    }
+
+    .mat-card-header,
+    .mat-card-content,
+    .mat-card-actions {
+        padding: $margin * 2;
+    }
+
+    .mat-card-actions {
+        margin-left: 0;
+        margin-right: 0;
+        bottom: 0;
+        position: absolute;
+    }
+
+    .mat-card-content {
+        margin-bottom: 76px;
+    }
+    
+    .fish-avatar {
+        background-size: cover;
+    }
+
+    .fish-card-image {
+        background-size: cover;
+        background-position: center center;
+        height: 160px;
+        width: 100%;
+    }
+}

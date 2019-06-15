@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription, noop } from 'rxjs';
 import { FishstoreService } from '../../services/fishstore.service';
 import { Fish } from '../../classes/fish.class';
-import { CustomFishService } from '../../services/custom-fish.service';
+import { CustomFishService, CustomFish } from '../../services/custom-fish.service';
 import { ModalMessageDialogComponent } from 'src/app/shared/components/modal-message/modal-message.component';
 import { MatDialog } from '@angular/material';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fish-detail',
@@ -29,7 +30,7 @@ export class FishDetailComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
       this.fishSpecCode = Number(params.specCode)
       this.loadFishData(this.fishSpecCode);
       this.loadCustomFishData(this.fishSpecCode);
@@ -42,7 +43,7 @@ export class FishDetailComponent implements OnInit {
   }
 
   private loadCustomFishData(specCode: number) {
-    this.customFishSubscription = this.customFishService.getCustomFishItem(specCode)
+    this.customFishService.getCustomFishItem(specCode).pipe(take(1))
       .subscribe((data) => {
         if (data.length > 0){
           this.customFishData = data[0];
@@ -54,14 +55,13 @@ export class FishDetailComponent implements OnInit {
 
   private loadFishData(specCode: number) {
     this.loading = true;
-    this.dataSubscription = this.fishStore.getFishDetail(specCode)
+    this.fishStore.getFishDetail(specCode).pipe(take(1))
       .subscribe((data) => {
         this.fish = data.data[0];
       }, (error) => {
         this.openDialog(error);
       }, () => {
         this.loading = false;
-        this.dataSubscription.unsubscribe();
       });
   }
 
@@ -77,15 +77,39 @@ export class FishDetailComponent implements OnInit {
   }
 
   public addCustomFishData() : void {
-    this.customFishService.addCustomFishData(this.fish);
+    this.customFishService.addCustomFishData(this.fish as CustomFish)
+      .then((data) => {
+
+      }, (error) => {
+        window.alert('ERROR 893145');
+      })
+      .finally(() => {
+        this.loadCustomFishData(this.fishSpecCode);
+      })
   }
 
   public removeCustomFishData() : void{
-    this.customFishService.removeCustomFishData(this.fish);
+    this.customFishService.removeCustomFishData(this.fish as CustomFish)
+    .then((data) => {
+
+    }, (error) => {
+      window.alert('ERROR 684535');
+    })
+      .finally(() => {
+        this.loadCustomFishData(this.fishSpecCode);
+      })
   }
 
   public overideCustomFishData() : void {
-    this.customFishService.overideCustomFishData(this.fish);
+    this.customFishService.overideCustomFishData(this.fish as CustomFish)
+      .then((data) => {
+
+      }, (error) => {
+        window.alert('ERROR 83215847');
+      })
+      .finally(() => {
+        this.loadCustomFishData(this.fishSpecCode);
+      })
   }
   
 }

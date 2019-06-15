@@ -1,0 +1,21 @@
+<mat-card class="fish-card">
+    <mat-card-header>
+      <div mat-card-avatar class="fish-avatar" [ngStyle]="{'background-image':'url('+fish.PicLink+')'}"></div>
+      <mat-card-title>
+        <span *ngIf=fish.FBname>{{fish.FBname}}</span>
+        <span *ngIf=!fish.FBname>N/A</span>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span>{{getFishFullName() | truncate: 20}}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div class="fish-card-image" [ngStyle]="{'background-image':'url('+fish.PicLink+')'}"></div>
+    <mat-card-content>
+      <p>
+        {{fish.Comments | truncate: 60}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Remove</button>
+    </mat-card-actions>
+  </mat-card>
